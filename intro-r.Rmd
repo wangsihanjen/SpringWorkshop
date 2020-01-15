@@ -70,6 +70,10 @@ You should have already installed these packages using commands like
 Next, you need to load the packages in your working environment. We do this with
 the `library` function. Note that you only need to **install** packages once, but
 you need to **load** them each time you relaunch RStudio.
+```{r first-code-chunk}
+4+12
+```
+
 
 ```{r load-packages, message = FALSE}
 library(dplyr)
@@ -222,7 +226,9 @@ the document to see the results.  Knit should produce an HTML file for you that 
 
 ### Some Exploration
 
-Let's start to examine the data a little more closely. 
+Let's start to exami
+
+ne the data a little more closely. 
 To find out more about this dataset, you could use some help.  Tyr typing the name of the dataset with a '?' in front of it. 
 ```{r help-diamonds}
 
@@ -236,6 +242,10 @@ a single column of a data frame separately using a command like
 
 diamonds$clarity[1:100]
 ```
+```{r exercise-only-see-length}
+diamonds$x
+```
+
 
 This command will only show the value of clarity of the diamonds measured in this 
 dataset. The dollarsign basically says "go to the data frame that comes before me, and find the variable that comes after me". Note that it should have given you a message in the data viewer window that you have exceeded the maximum print length so it has stopped before it has shown you more than 1000 values. 
@@ -324,6 +334,10 @@ mathematical expressions like
 ```{r calc-total-dimensions-first-stone}
 3.95 + 3.98 + 2.43
 ```
+```{r exercise-do-it-for-more-diamonds}
+sum_xyz <- diamonds$x+diamonds$y+diamonds$z
+sum_xyz[1:18]
+```
 
 to get the value for that first one. We could repeat this once for each 
 stone, but there is a faster way. If we add the vector for each, R will compute all sums simultaneously.
@@ -346,6 +360,7 @@ as a permanent column in our data frame.
 diamonds <- diamonds %>%
   mutate(total = x + y + z)
 ```
+%>% piping operator
 
 What in the world is going on here? The `%>%` operator is called the **piping** 
 operator. Basically, it takes the output of the current line and pipes it into 
@@ -386,7 +401,7 @@ of a scatter plot. You want both? Just layer them on:
 
 ```{r plot-total-vs-year-line-and-point}
 ggplot(data = diamonds, aes(x = table, y = total)) +
-  geom_line() +
+  geom_line() + 
   geom_point()
 ```
 
@@ -415,6 +430,8 @@ the y dimension for these stones with the expression
 ```{r x-greater-than-y}
 diamonds <- diamonds %>%
   mutate(more_x = x > y)
+diamonds$more_x [1:20]
+
 ```
 
 This command add a new variable to the `diamonds` data frame containing the values
